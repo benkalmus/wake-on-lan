@@ -1,5 +1,11 @@
 # wol http service
 
+## Build the app
+
+```sh
+go build -o wol-http .
+```
+
 ## To Run
 
 copy wol-http.service file to
