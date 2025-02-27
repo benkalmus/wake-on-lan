@@ -1,0 +1,14 @@
+[Unit]
+Description=Wake On Lan HTTP Service that wakes up devices based on MAC address or Device Name
+; After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/wol-http -config /home/benkalmus/work/wake-on-lan/wol-config.json
+Restart=always
+User=root
+WorkingDirectory=/usr/local/bin/
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
