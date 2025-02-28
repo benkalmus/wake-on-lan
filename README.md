@@ -40,3 +40,4 @@ sudo systemd daemon-reload
 Check that the following is set:
 
 - `WOL_DISABLE=N` in the file `/etc/tlp.conf`
+- change `eno1` to your interface (check with `ip a`)
