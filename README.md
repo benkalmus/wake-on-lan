@@ -15,7 +15,9 @@ go build -o wol-http .
 copy wol-http.service file to
 
 ```sh
-sudo cp  wol-http.service /etc/systemd/system/wol-http.service
+sudo cp wol-http.service /etc/systemd/system/wol-http.service
+# the http server we just built:
+sudo cp wol-http /usr/local/bin/wol-http
 
 sudo systemd daemon-reload
 sudo systemd enable wol-http
