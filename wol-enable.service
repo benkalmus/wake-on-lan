@@ -1,0 +1,13 @@
+[Unit]
+Description=Enable Wake-on-LAN
+After=network-online.target systemd-suspend.service systemd-hibernate.service systemd-sleep.service
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/sbin/ethtool --change eno1 wol g
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
