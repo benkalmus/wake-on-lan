@@ -50,3 +50,11 @@ Check that the following is set:
 
 - `WOL_DISABLE=N` in the file `/etc/tlp.conf`
 - change `eno1` to your interface (check with `ip a`)
+
+---
+
+## TODO
+
+- Instead of hardcoded ethernet interface, auto detect it!
+- Endpoint to get list of devices (should likely require auth)
+- Endpoint to add new device
