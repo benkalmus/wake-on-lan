@@ -6,8 +6,6 @@ After=network-online.target systemd-suspend.service systemd-hibernate.service sy
 Type=oneshot
 User=root
 ExecStart=/sbin/ethtool --change eno1 wol g
-StandardOutput=syslog
-StandardError=syslog
 
 [Install]
 WantedBy=multi-user.target
