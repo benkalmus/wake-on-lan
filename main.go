@@ -88,6 +88,10 @@ func (h WakeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Sent Wake-on-LAN packet to %s : %s", deviceName, macAddr)
 }
 
+func healthHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+}
+
 func start(httpPort, wakeOnLanPort int, configFile string) {
 	// Load the mappings from file
 	deviceNameToMAC = make(map[string]string)
@@ -99,6 +103,7 @@ func start(httpPort, wakeOnLanPort int, configFile string) {
 	wakeHandler := WakeHandler{wakeOnLanPort}
 	// Setup the HTTP server
 	http.Handle("/wake/", wakeHandler)
+	http.HandleFunc("GET /health", healthHandler)
 
 	log.Printf("Starting WoL server on port %d...", httpPort)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", httpPort), nil))

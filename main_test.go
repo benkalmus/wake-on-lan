@@ -3,6 +3,8 @@ package main
 import (
 	"bytes"
 	"net"
+	"net/http"
+	"net/http/httptest"
 	"strconv"
 	"testing"
 	"time"
@@ -76,5 +78,17 @@ func TestWakeOnLan(t *testing.T) {
 		}
 	case <-time.After(2 * time.Second):
 		t.Fatal("Timeout: Did not receive Wake-on-LAN packet")
+	}
+}
+
+func TestHTTPRoot(t *testing.T) {
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest(http.MethodGet, "/health", nil)
+	healthHandler(w, r)
+	res := w.Result()
+	defer res.Body.Close()
+
+	if res.StatusCode != 200 {
+		t.Errorf("Expected status 200, got %d", res.StatusCode)
 	}
 }
