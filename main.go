@@ -72,6 +72,15 @@ func (h WakeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	deviceName := parts[2]
 
+	if deviceName == "all" {
+		// wake up all devices
+		for _, addr := range deviceNameToMAC {
+			_ = sendWakeOnLan(addr, h.wakeOnLANPort)
+		}
+		w.WriteHeader(http.StatusAccepted)
+		return
+	}
+
 	macAddr, found := deviceNameToMAC[deviceName]
 	if !found {
 		// If not found, assume identifier is a MAC address
